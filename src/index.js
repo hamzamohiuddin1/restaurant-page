@@ -2,6 +2,8 @@
 import './style.css';
 import Logo from './assets/logo.jpeg';
 import renderBreakfast from './breakfast.js';
+import renderLunch from './lunch.js';
+import renderDinner from './dinner.js';
 
 const content = document.querySelector('#content');
 const tabs = document.createElement('div');
@@ -11,6 +13,12 @@ const tabMap = {
     1: 'breakfast',
     2: 'lunch',
     3: 'dinner'
+};
+
+const renderMap = {
+    1: renderBreakfast(),
+    2: renderLunch(),
+    3: renderDinner()
 };
 
 for (let i=0; i<3; i++) {
@@ -41,11 +49,11 @@ content.appendChild(index);
 
 for(let i=0;i<3;i++){
     let t = document.querySelector(`.${tabMap[i+1]}`);
-    let breakfast = renderBreakfast();
+    let p = renderMap[i+1];
     t.addEventListener('click', function() {
         let currentPage = document.querySelector('.page');
         content.removeChild(currentPage);
-        content.appendChild(breakfast);
+        content.appendChild(p);
     });
 }
 
